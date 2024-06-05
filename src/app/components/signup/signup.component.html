@@ -1,0 +1,112 @@
+<div class="outer-container">
+    <div class="inner-container">
+        <div class="content-container">
+            <app-layout></app-layout>
+        </div>
+        <div class="signup-form-container">
+            <div class="form-title">
+                <h3 class="signup">Signup</h3>
+                <p class="already">Already have an Account?<a class="signIn" routerLink="/signin">Sign in</a></p>
+                <form class="signup-form" [formGroup]="signUpForm">
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="user_firstname">First Name</label>
+                        </span>
+                        <input class="input-field" id="user_firstname" type="text" name="user_firstname"
+                            formControlName="user_firstname" />
+                        <p class="error"
+                            *ngIf="fields['user_firstname'].invalid && (fields['user_firstname'].touched || fields['user_firstname'].dirty)">
+                            First Name is Required.
+                        </p>
+                    </div>
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="user_lastname">Last Name</label>
+                        </span>
+                        <input class="input-field" id="user_lastname" type="text" name="user_lastname"
+                            formControlName="user_lastname" />
+                        <p class="error"
+                            *ngIf="fields['user_lastname'].invalid && (fields['user_lastname'].touched || fields['user_lastname'].dirty)">
+                            Last Name is Required.
+                        </p>
+                    </div>
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="user_email">Email</label>
+                        </span>
+                        <input class="input-field" id="user_email" type="email" name="user_email"
+                            formControlName="user_email" />
+                        <div
+                            *ngIf="fields['user_email'].invalid && (fields['user_email'].touched  || fields['user_email'].dirty)">
+                            <p class="error" *ngIf="fields['user_email'].errors?.['required']">Email is Required.</p>
+                            <p class="error" *ngIf="fields['user_email'].errors?.['user_email']">Please Enter Valid
+                                Email</p>
+                        </div>
+                    </div>
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="user_password">Password</label>
+                        </span>
+                        <div class="password">
+                            <input class="password-field" id="user_password" [type]="showPassword ? 'text' : 'password'"
+                                name="user_password" formControlName="user_password" />
+
+                            <i class="fa" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                                (click)="toggle()">
+                            </i>
+                        </div>
+                        <div class="error"
+                            *ngIf="fields['user_password'].invalid && (fields['user_password'].touched || fields['user_password'].dirty)">
+                            <p class="error" *ngIf="fields['user_password'].errors?.['required']">
+                                Password is required.
+                            </p>
+                            <p class="error" *ngIf="fields['user_password'].errors?.['numberChar']">
+                                Password should have Atleast one Number
+                            </p>
+                            <p class="error" *ngIf="fields['user_password'].errors?.['spclChar']">
+                                Password Should have Atleast one Special Character.
+                            </p>
+                            <p class="error" *ngIf="fields['user_password'].errors?.['capsChar']">
+                                Password Should have Atleast One Capital Letter.
+                            </p>
+                            <p class="error" *ngIf="fields['user_password'].errors?.['passLen']">
+                                Password Should have Atleast 6 Characters.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label for="phone">Phone:</label>
+                        </span>
+                        <input class="input-field" id="Phone" type="text" name="phone" formControlName="phone" />
+                        <div *ngIf="fields['phone'].invalid && (fields['phone'].touched  || fields['phone'].dirty)">
+                            <p class="error" *ngIf="fields['phone'].errors?.['required']">Phone is Required.</p>
+                            <p class="error" *ngIf="fields['phone'].errors?.['enterNumbersOnly']">
+                                Enter Numbers Only.
+                            </p>
+                            <p class="error" *ngIf="fields['phone'].errors?.['invalidNumber']">
+                                Enter Correct format Phone Number
+                            </p>
+                        </div>
+                    </div>
+                    <div class="terms-conditions">
+                        <input class="input-field" id="termsandconditions" type="checkbox" name="termsandconditions"
+                            formControlName="termsandconditions" />
+                        <div>
+                            <span class="terms">I agree to the <a routerLink="">Terms of Services</a> and<a
+                                    routerLink="">Privacy Policy</a>
+                            </span>
+                        </div>
+                    </div>
+                    <p class="error"
+                        *ngIf="fields['termsandconditions'].invalid && (fields['termsandconditions'].touched || fields['termsandconditions'].dirty)">
+                        You must agree to the terms and conditions.
+                    </p>
+                    <div class="create-acc">
+                        <button class="btn" (click)="register()">create Account for free</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

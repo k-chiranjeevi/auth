@@ -1,0 +1,73 @@
+<div class="outer-container">
+    <div class="inner-container">
+        <div class="content-container">
+            <app-layout></app-layout>
+        </div>
+        <div class="signup-form-container">
+            <div class="form-title">
+                <h3 class="signup">Signin</h3>
+                <p class="already">Don't have an Account?<a routerLink="/signup">Sign up</a></p>
+                <form class="signin-form" [formGroup]="signinForm">
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="email">Email</label>
+                        </span>
+                        <input formControlName="email" class="input-field" id="email" type="email" name="email" />
+                        <div *ngIf="fields['email'].invalid && (fields['email'].touched  || fields['email'].dirty)">
+                            <p class="error" *ngIf="fields['email'].errors?.['required']">Email is Required.</p>
+                            <p class="error" *ngIf="fields['email'].errors?.['email']">Please Enter Valid
+                                Email</p>
+                        </div>
+                    </div>
+                    <div class="input-field-container">
+                        <span class="label">
+                            <label class="required" for="password">Password</label>
+                        </span>
+                        <div class="password">
+                            <input formControlName="password" class="password-field" id="password"
+                                [type]="showPassword ? 'text' : 'password'" name="password" />
+
+                            <i class="fa password-icon" [class.fa-eye]="showPassword" [class.fa-eye-slash]="!showPassword"
+                                (click)="toggle()">
+                            </i>
+                        </div>
+                        <div class="error"
+                            *ngIf="fields['password'].invalid && (fields['password'].touched || fields['password'].dirty)">
+                            <p class="error" *ngIf="fields['password'].errors?.['required']">
+                                Password is required.
+                            </p>
+                            <p class="error" *ngIf="fields['password'].errors?.['numberChar']">
+                                Password should have Atleast one Number
+                            </p>
+                            <p class="error" *ngIf="fields['password'].errors?.['spclChar']">
+                                Password Should have Atleast one Special Character.
+                            </p>
+                            <p class="error" *ngIf="fields['password'].errors?.['capsChar']">
+                                Password Should have Atleast One Capital Letter.
+                            </p>
+                            <p class="error" *ngIf="fields['password'].errors?.['passLen']">
+                                Password Should have Atleast 6 Characters.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="other-fields">
+                        <span class="text">
+                            <input type="checkbox" />Remember me
+                        </span>
+                        <a class="text" routerLink="">Forgot Password?</a>
+                    </div>
+                    <div class="create-acc">
+                        <button class="btn" (click)="login()">Sign in</button>
+                    </div>
+                </form>
+                <div>
+                    <div class="signin-options">
+                        <span class="option"><i class="fa fa-twitter"></i></span>
+                        <span class="option"><i class="fa fa-facebook"></i></span>
+                        <span class="option"><i class="fa fa-github"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
