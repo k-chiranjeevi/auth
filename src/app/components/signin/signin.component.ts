@@ -39,7 +39,7 @@ export class SigninComponent implements OnInit {
     if (this.signinForm.valid) {
       this.service.login(payload).subscribe((res: any) => {
         if (res) {
-          localStorage.setItem('user', JSON.stringify({name:"john deree", email:"john@test.com"}));
+          localStorage.setItem('user', JSON.stringify(res));
           localStorage.setItem('isLogin', 'true');
           this.router.navigate(['/dashboard']);
           this.signinForm.reset();
@@ -47,9 +47,6 @@ export class SigninComponent implements OnInit {
       }, (err: any) => {
         console.log(err);
         this.errorMessage = err;
-        this.router.navigate(['/dashboard']);
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem('user', JSON.stringify({name:"john deree", email:"john@test.com"}));
       })
     }
   }
