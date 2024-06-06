@@ -9,7 +9,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class AuthserviceService {
   private url = 'https://snapkaro.com/eazyrooms_staging/api';
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   register(data: any): Observable<any> {
     return this.http.post<any>(`${this.url}/user_registeration`, JSON.stringify(data))
@@ -25,20 +25,24 @@ export class AuthserviceService {
     const isLogin = Boolean(localStorage.getItem('isLogin')) ? Boolean(localStorage.getItem('isLogin')) : false;
     return isLogin;
   }
-  
+
   logout() {
     localStorage.removeItem('isLogin');
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/signin']);
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred';
+    console.log(error)
+    let errorMessage = {message:'An error occurred', isinvalid:false};
     if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
+      errorMessage.message = error.error.message;
     } else if (error.status === 400) {
       errorMessage = error.error.message;
+    } else if (error.status === 401 || error.status === 403) {
+      errorMessage.message = 'Invalid username or pasword. Please try again.';
+      errorMessage.isinvalid = true;
     } else {
-      errorMessage = `Error ${error.status}: ${error.error.message || 'Unknown error'}`;
+      errorMessage.message = `Error ${error.status}: ${error.error.message || 'Unknown error'}`;
     }
     return throwError(errorMessage);
   }

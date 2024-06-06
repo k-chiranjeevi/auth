@@ -7,6 +7,7 @@
             <div class="form-title">
                 <h3 class="signup">Signin</h3>
                 <p class="already">Don't have an Account?<a routerLink="/signup">Sign up</a></p>
+                <p class="error" *ngIf="errorMessage?.invalidCreds">{{errorMessage.message}}</p>
                 <form class="signin-form" [formGroup]="signinForm">
                     <div class="input-field-container">
                         <span class="label">
@@ -15,8 +16,6 @@
                         <input formControlName="email" class="input-field" id="email" type="email" name="email" />
                         <div *ngIf="fields['email'].invalid && (fields['email'].touched  || fields['email'].dirty)">
                             <p class="error" *ngIf="fields['email'].errors?.['required']">Email is Required.</p>
-                            <p class="error" *ngIf="fields['email'].errors?.['email']">Please Enter Valid
-                                Email</p>
                         </div>
                     </div>
                     <div class="input-field-container">
@@ -35,18 +34,6 @@
                             *ngIf="fields['password'].invalid && (fields['password'].touched || fields['password'].dirty)">
                             <p class="error" *ngIf="fields['password'].errors?.['required']">
                                 Password is required.
-                            </p>
-                            <p class="error" *ngIf="fields['password'].errors?.['numberChar']">
-                                Password should have Atleast one Number
-                            </p>
-                            <p class="error" *ngIf="fields['password'].errors?.['spclChar']">
-                                Password Should have Atleast one Special Character.
-                            </p>
-                            <p class="error" *ngIf="fields['password'].errors?.['capsChar']">
-                                Password Should have Atleast One Capital Letter.
-                            </p>
-                            <p class="error" *ngIf="fields['password'].errors?.['passLen']">
-                                Password Should have Atleast 6 Characters.
                             </p>
                         </div>
                     </div>

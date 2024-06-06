@@ -6,16 +6,14 @@ import { AuthserviceService } from '../services/auth-service/authservice.service
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class SigninGuard implements CanActivate {
   constructor(private service: AuthserviceService, private router: Router) { }
   canActivate(): boolean {
     if (this.service.isLogin()) {
-      return true
-    } else {
-      this.router.navigate(['/signin'])
+      this.router.navigate(['/dashboard'])
       return false
+    } else {
+      return true
     }
-
   }
-
 }

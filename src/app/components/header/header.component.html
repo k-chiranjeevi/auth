@@ -1,0 +1,17 @@
+<header class="container">
+    <div>
+        LOGO
+    </div>
+    <div class="acc_details">
+        <div class="dropdown details" (click)="toggleDropdown()">
+            <i class="fa fa-user-circle-o acc" style="font-size:24px"></i>
+            <span class="username">{{this.userDetails?.name}}</span>
+        </div>
+        <div class="dropdown" [class.open]="isOpen">
+            <div class="dropdown-content">
+                <a>Account Details</a>
+                <a (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
